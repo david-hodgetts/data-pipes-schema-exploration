@@ -49,15 +49,16 @@ function inferSchema(value){
   return rootType;
 }
 
-let value = Immutable.List([Immutable.Map({foo:Immutable.List([1, 2, 3]), bar:"pipo"})]);
+let value = Immutable.List([Immutable.Map({counts:Immutable.List([1, 2, 3]), name:"Mario", age:300})]);
 let schema = inferSchema(value);
 console.log(pp(schema));
 
 
 let fields = Immutable.Map({
   root: Type.ListType(Type.ObjectType("", Immutable.Map({
-    foo: Type.ListType(Type.IntegerType),
-    bar: Type.StringType
+    name: Type.StringType,
+    counts: Type.ListType(Type.IntegerType),
+    age: Type.IntegerType
   })))
 });
 
@@ -65,4 +66,17 @@ let schema2 = Type.ObjectType("Root", fields);
 console.log(pp(schema2));
 
 console.log(schema2.equals(schema));
+
+`
+{
+  type Root
+  {
+    root:[Anonymous]
+  }
+  type Anonymous
+  {
+    foo:[Integer]
+    bar:String
+  }
+`
 
