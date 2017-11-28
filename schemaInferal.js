@@ -1,9 +1,13 @@
-Immutable  = require('immutable');
-pp = require("pretty-immutable");
+const Immutable  = require('immutable');
+const pp = require("pretty-immutable");
+const Type = require('./type');
+const inferType = require('./typeInferal');
 
-Type = require('./type');
-inferType = require('./typeInferal');
-
+function* anonymousTypeMaker() {
+  var index = 0;
+  while(true)
+    yield `Anonymous_${index++}`;
+}
 
 // infers schema from valid value (js scalar, Map or List)
 // breadth first traversal
@@ -11,14 +15,15 @@ function inferSchema(value){
   
   let rootType = Type.ObjectType("Root");
 
+  const anonymousTypeGen= anonymousTypeMaker();
+
   const queue = [];
-  // TODO remove parentType
   queue.push({path: ["fields", "root"], value:value});
 
   while(queue.length > 0){
     let descriptor = queue.pop();
 
-    console.log("path", descriptor.path, "value", pp(value));
+    // console.log("path", descriptor.path, "value", pp(value));
     
     let type = inferType(descriptor.value);
 
@@ -32,14 +37,17 @@ function inferSchema(value){
       // console.log("set a list in", descriptor.path);
       rootType = rootType.setIn(descriptor.path, type());
       let path = descriptor.path.concat("ofType");
+      // examine type of first item in list
       queue.push({path:path, value: descriptor.value.get(0)});
     }
 
     if(type.name === "ObjectType"){
       // console.log("set an object in", descriptor.path);
-      rootType = rootType.setIn(descriptor.path, type());
+      const typeName = anonymousTypeGen.next().value;
+      rootType = rootType.setIn(descriptor.path, type(typeName));
       let path = descriptor.path.concat("fields");
       let entries = descriptor.value.entries();
+      // enumerate fields of Map
       for([fieldName, val] of entries){
         queue.push({path:path.concat(fieldName), value: val});
       } 
@@ -49,34 +57,4 @@ function inferSchema(value){
   return rootType;
 }
 
-let value = Immutable.List([Immutable.Map({counts:Immutable.List([1, 2, 3]), name:"Mario", age:300})]);
-let schema = inferSchema(value);
-console.log(pp(schema));
-
-
-let fields = Immutable.Map({
-  root: Type.ListType(Type.ObjectType("", Immutable.Map({
-    name: Type.StringType,
-    counts: Type.ListType(Type.IntegerType),
-    age: Type.IntegerType
-  })))
-});
-
-let schema2 = Type.ObjectType("Root", fields);
-console.log(pp(schema2));
-
-console.log(schema2.equals(schema));
-
-`
-{
-  type Root
-  {
-    root:[Anonymous]
-  }
-  type Anonymous
-  {
-    foo:[Integer]
-    bar:String
-  }
-`
-
+module.exports = inferSchema;

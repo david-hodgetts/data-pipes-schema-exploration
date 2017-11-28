@@ -1,19 +1,13 @@
 {
-  "name": "data-schema",
+  "name": "data-pipes.schema",
   "version": "0.0.1",
-  "description": "build and manage simple schemas for Immutable.js data structures",
-  "main": "index.js",
+  "description": "explore a schema definition language for the data-pipes project",
+  "main": "",
   "dependencies": {
     "immutable": "^4.0.0-rc.4",
     "pretty-immutable": "^1.0.1"
   },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-immutable": "^2.0.0-alpha.1",
-    "mocha": "^4.0.1"
-  },
   "scripts": {
-    "test": "node_modules/.bin/_mocha"
   },
   "author": "david hodgetts",
   "license": "MIT"

@@ -1,7 +1,6 @@
-Immutable  = require('immutable');
-pp = require("pretty-immutable");
-
-Type = require('./type');
+const Immutable  = require('immutable');
+const pp = require("pretty-immutable");
+const Type = require('./type');
 
 // isInteger polyfill
 // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
@@ -38,6 +37,9 @@ const TypeTests = [
   },
 ];
 
+// given a value return corresponding type.
+// if type not found returns null
+// (type can be a record for scalar values or a factory function)
 function inferType(value){
   for(let i = 0; i < TypeTests.length; i++){
     const maybeType = TypeTests[i].test(value);
