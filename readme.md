@@ -104,7 +104,7 @@ If we inspect the root of this schema, *RootType*, we obtain the following struc
 
 ## Code exploration
 
-this repo contains a first exploration of this proposal in the form of a set of node.js files.
+This repo contains a first exploration of the proposal in the form of a set of node.js files.
 - *type.js* contains a set of Records to represent a type syntax tree
 - *schemaInferal.js* contains a function to generate a best guess syntax tree from a value
 - *typeInferal.js* is a dependency of schemaInferal
