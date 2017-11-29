@@ -38,8 +38,8 @@ const TypeTests = [
 ];
 
 // given a value return corresponding type.
-// if type not found returns null
-// (type can be a record for scalar values or a factory function)
+// return null if type not found.
+// (note that return value, type, can be a record for scalar values or a factory function)
 function inferType(value){
   for(let i = 0; i < TypeTests.length; i++){
     const maybeType = TypeTests[i].test(value);

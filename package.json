@@ -1,7 +1,7 @@
 {
-  "name": "data-pipes.schema",
+  "name": "data-pipes.schema-draft",
   "version": "0.0.1",
-  "description": "explore a schema definition language for the data-pipes project",
+  "description": "explores a schema definition language for the data-pipes project",
   "main": "",
   "dependencies": {
     "immutable": "^4.0.0-rc.4",

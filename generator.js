@@ -1,7 +1,7 @@
 Immutable  = require('immutable');
 pp = require("pretty-immutable");
 
-// scemaTree -> Map of types (key:type_name, value type)
+// schemaTree -> Map of types (key:type_name, value type)
 function flattenSchema(schema){
   let result = Immutable.Map();
 

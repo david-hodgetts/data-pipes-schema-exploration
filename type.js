@@ -24,13 +24,3 @@ const Type = {
 };
 
 module.exports = Type;
-
-// personFields = {
-//   name: Type.StringType,
-//   age: Type.IntegerType,
-// };
-// PersonType = Type.ObjectType("Person", Immutable.Map(personFields));
-
-// schema = Type.ObjectType("Root", Immutable.Map({people: Type.ListType(PersonType)}));
-
-// console.log(pp(schema));

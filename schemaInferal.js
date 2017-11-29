@@ -26,11 +26,9 @@ function inferSchema(value){
   queue.push({path: ["fields", "root"], value:value});
 
   while(queue.length > 0){
-    let descriptor = queue.pop();
-
-    // console.log("path", descriptor.path, "value", pp(value));
+    const descriptor = queue.pop();
     
-    let type = inferType(descriptor.value);
+    const type = inferType(descriptor.value);
 
     if(type.kind === "SCALAR"){
       // console.log("set in", descriptor.path);
@@ -42,7 +40,9 @@ function inferSchema(value){
       // console.log("set a list in", descriptor.path);
       rootType = rootType.setIn(descriptor.path, type());
       const path = descriptor.path.concat("ofType");
+
       // examine type of first item in list
+      // TODO: examine more elements?
       queue.push({path:path, value: descriptor.value.get(0)});
     }
 
