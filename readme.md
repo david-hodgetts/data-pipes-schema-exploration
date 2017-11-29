@@ -8,7 +8,7 @@ To achieve this goal, we propose to associate a type schema to each *data-nugget
 
 ## A new format?
 
-Although schemas provide powerful introspection capabilities for code manipulation, they are often pretty gruesome to handle for the user. We want to avoid this as much as possible. Our schema system should therefore offer its users an expressive and easy to manipulate representation.
+Although schemas provide powerful introspection capabilities for code manipulation, they are often pretty gruesome to handle for the user. We want to avoid this as much as possible. Our schema system should therefore be expressive and easy to manipulate by its users.
 
 To achieve this, we propose to develop a custom literal schema representation highly inspired by the GraphQL schema definition language.
 
@@ -45,7 +45,7 @@ We are in this regard heavily inspired by the GraphQL schema definition language
 
 Before producing a formal definition, we propose a heuristic approach via some simple code exploration.
 
-Here is a simple example:
+Here is a what a simple example would look like:
 ```
 type Root{
   people:[Person]
@@ -60,7 +60,7 @@ type Person{
 
 Note that by convention each schema defines a Root objectType. This is the entry point for the schema.
 
-Finally, we keep in mind that this representation could also serve as a serialization format.
+Finally, we should keep in mind that this representation could also serve as a serialization format.
 
 ## Structural representation (syntax tree)
 
