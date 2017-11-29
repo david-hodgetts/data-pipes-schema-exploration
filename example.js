@@ -2,6 +2,7 @@ const Immutable  = require('immutable');
 const pp = require("pretty-immutable");
 const Type = require('./type');
 const inferSchema = require('./schemaInferal');
+const generateLiteral = require('./generator');
 
 // build a value to infer schema from
 const value = Immutable.List([Immutable.Map({counts:Immutable.List([1, 2, 3]), name:"Mario", age:300})]);
@@ -22,3 +23,6 @@ const handmadeSchema = Type.ObjectType("Root", fields);
 console.log(pp(handmadeSchema));
 
 console.log("inferred schema equals handmade schema?", handmadeSchema.equals(inferredSchema));
+
+// lets generate a literal representation
+console.log(generateLiteral(inferredSchema));
