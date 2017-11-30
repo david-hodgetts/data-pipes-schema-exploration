@@ -1,8 +1,8 @@
 const Immutable  = require('immutable');
 const pp = require("pretty-immutable");
-const Type = require('./type');
-const inferSchema = require('./schemaInferal');
-const generateLiteral = require('./generator');
+const Type = require('./lib/type');
+const inferSchema = require('./lib/schemaInferal');
+const generateLiteral = require('./lib/generator');
 
 // build a value to infer schema from
 const value = Immutable.List([Immutable.Map({counts:Immutable.List([1, 2, 3]), name:"Mario", age:300})]);
