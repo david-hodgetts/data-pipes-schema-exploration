@@ -5,10 +5,10 @@
   "main": "",
   "dependencies": {
     "immutable": "^4.0.0-rc.4",
+    "pegjs": "^0.10.0",
     "pretty-immutable": "^1.0.1"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "author": "david hodgetts",
   "license": "MIT"
 }
