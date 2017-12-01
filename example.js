@@ -35,3 +35,4 @@ console.log(literal);
 const parsedSchema = parseLiteral(literal);
 console.log("schema parsed from literal:");
 console.log(pp(parsedSchema));
+console.log("\nparsed schema equals handmade schema?", handmadeSchema.equals(parsedSchema));
