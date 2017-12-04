@@ -105,8 +105,35 @@ If we inspect the root of this schema, *RootType*, we obtain the following struc
 ## Code exploration
 
 This repo contains a first exploration of the proposal in the form of a set of node.js files.
+This exploration serves only to provide a general shape and a concrete basis for discussion.
+It is in no way definitive or production ready.
 - *type.js* contains a set of Records to represent a type syntax tree
 - *schemaInferal.js* contains a function to generate a best guess syntax tree from a value
 - *typeInferal.js* is a dependency of schemaInferal
 - *generator.js* contains a function which given a syntax tree generates a literal representation
-- *example.js* contains some code illustrating schema inferal, handmade syntax tree building and literal generation
+- *parser.js* contains a parser returning a syntax tree for a given literal representation
+- *example.js* contains some code illustrating the use of the different modules.
+
+## Issues and discussion
+
+Here are some points in need of discussion.
+
+- type system features
+- cyclical references
+
+The current type system is limited to representing concrete unrelated types.  
+It also only supports a finite set of scalars.  
+What features do we need to support to make our type system useful?
+
+We can not represent cycles in our syntax trees. i.e. The following is a problem:
+
+```
+type Person{
+  name:String
+  friend:Person
+}
+```
+To provide support for cycles, we have to modify the structure of the syntax trees.
+
+
+
